@@ -5,16 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,12 +15,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import pe.edu.upc.eatsexplorer.shared.ui.CustomButton
 import pe.edu.upc.eatsexplorer.shared.ui.InputTextField
 import pe.edu.upc.eatsexplorer.shared.ui.PasswordTextField
 import pe.edu.upc.eatsexplorer.ui.theme.EatsExplorerTheme
 
 @Composable
-fun SignInScreen(){
+fun SignInScreen(navigateTo: ()->Unit){
     Scaffold {paddingValues ->
         val username = remember {
             mutableStateOf("")
@@ -49,21 +40,12 @@ fun SignInScreen(){
         ) {
             InputTextField(input = username, placeholder = "Username")
             PasswordTextField(input = password , placeholder = "Password")
-            Button(modifier = Modifier.fillMaxWidth(),
-                onClick = { /*TODO*/ }) {
-                Text(text = "Sign In")
-            }
+            CustomButton(text = "Sign In", {})
+            CustomButton(text = "Sign Up", navigateTo)
         }
     }
 }
 
-@Preview
-@Composable
-fun SignInScreenPreview(){
-    EatsExplorerTheme {
-        SignInScreen()
-    }
-}
 
 
 /*Iconos

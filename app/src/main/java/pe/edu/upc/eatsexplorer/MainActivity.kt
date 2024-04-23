@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import pe.edu.upc.eatsexplorer.feature_auth.ui.signin.SignInScreen
+import pe.edu.upc.eatsexplorer.feature_auth.ui.signup.SignUpScreen
+import pe.edu.upc.eatsexplorer.feature_home.ui.home.HomeScreen
 import pe.edu.upc.eatsexplorer.ui.theme.EatsExplorerTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,9 +25,49 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignInScreen()
+                    HomeScreen()
                 }
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
