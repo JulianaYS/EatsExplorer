@@ -8,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -62,7 +63,7 @@ fun SignInScreen(){
                     IconButton(onClick = {
                         isPasswordVisible.value = !isPasswordVisible.value
                     }) {
-                        Icon(Icons.Filled.Lock, "Password")
+                        Icon(Icons.Filled.Visibility, "Password")
 
                     }
 
