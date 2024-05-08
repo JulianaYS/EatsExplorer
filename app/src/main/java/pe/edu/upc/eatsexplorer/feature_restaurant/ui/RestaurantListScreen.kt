@@ -6,13 +6,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.glide.GlideImage
 import pe.edu.upc.eatsexplorer.feature_restaurant.data.repository.RestaurantRepository
@@ -40,10 +46,23 @@ fun RestaurantListScreen(
 
 @Composable
 fun RestaurantItem(restaurant: Restaurant){
+    val isFavorite = remember {
+        mutableStateOf(false)
+    }
     Card(modifier = Modifier.padding(6.dp)){
         Row (modifier = Modifier.fillMaxWidth()){
             RestaurantImage(restaurant.url)
-            Text(modifier = Modifier.padding(6.dp),text =restaurant.name)
+            Text(modifier = Modifier
+                .padding(6.dp).weight(5f)
+                ,text =restaurant.name)
+            IconButton(
+                onClick = { isFavorite.value=!isFavorite.value },
+                modifier = Modifier.weight(1.5f)) {
+                Icon(Icons.Filled.Favorite, "Favorite",
+                    tint = if (isFavorite.value)
+                        Color.Red else Color.Black)
+
+            }
         }
     }
 }
