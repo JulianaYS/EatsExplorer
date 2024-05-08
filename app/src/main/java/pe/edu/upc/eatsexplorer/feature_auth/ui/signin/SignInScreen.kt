@@ -21,9 +21,9 @@ import pe.edu.upc.eatsexplorer.shared.ui.PasswordTextField
 import pe.edu.upc.eatsexplorer.ui.theme.EatsExplorerTheme
 
 @Composable
-fun SignInScreen(navigateTo: ()->Unit){
+fun SignInScreen(navigateTo: ()->Unit){//navigateTo funcion como parametro
     Scaffold {paddingValues ->
-        val username = remember {
+        val username = remember { //para que se refresque o se pinte
             mutableStateOf("")
         }
         val password = remember {
@@ -35,18 +35,21 @@ fun SignInScreen(navigateTo: ()->Unit){
 
         Column(modifier = Modifier
             .padding(paddingValues)
-            .fillMaxSize(),
-            verticalArrangement = Arrangement.Center
+            .fillMaxSize(), //que ocupe todo el ancho
+            verticalArrangement = Arrangement.Center //centrar verticalmente
         ) {
             InputTextField(input = username, placeholder = "Username")
             PasswordTextField(input = password , placeholder = "Password")
+            // botones
             CustomButton(text = "Sign In", {})
-            CustomButton(text = "Sign Up", navigateTo)
+            CustomButton(text = "Sign Up", navigateTo) //navegar a la siguiente pantalla
         }
     }
 }
 
-
+//poner los estados en el view model
 
 /*Iconos
 material-icon-extended*/
+
+//agregar la navegacion

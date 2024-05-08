@@ -10,6 +10,7 @@ import pe.edu.upc.eatsexplorer.feature_auth.ui.signup.SignUpScreen
 
 @Composable
 fun HomeScreen(){
+    // para la navegacion
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "SignIn"){
         composable("SignIn")
@@ -28,5 +29,6 @@ fun HomeScreen(){
 
 
 /*para navegacion entre pantallas
-* navigation-compose
+* navigation-compose 2.7.7
+*
 * */

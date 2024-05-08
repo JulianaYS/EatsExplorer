@@ -15,7 +15,7 @@ import pe.edu.upc.eatsexplorer.shared.ui.InputTextField
 import pe.edu.upc.eatsexplorer.shared.ui.PasswordTextField
 
 @Composable
-fun SignUpScreen(authRepository: AuthRepository){
+fun SignUpScreen(authRepository: AuthRepository){ //injectar el repositorio
     Scaffold {paddingValues ->
         Column (modifier = Modifier
             .fillMaxSize()
@@ -41,8 +41,15 @@ fun SignUpScreen(authRepository: AuthRepository){
             InputTextField(input = username, placeholder = "Username")
             PasswordTextField(input = password, placeholder = "Password")
             PasswordTextField(input = confirmPassword, placeholder = "Confirm Password")
+            //CustomButton(text="Sign up"){
             CustomButton(text="Sign up"){
-                authRepository.signUp(UserRequest(username.value, lastName.value, firstName.value, password.value))
+                authRepository.signUp(
+                    UserRequest(
+                        username.value,
+                        lastName.value,
+                        firstName.value,
+                        password.value)
+                ) {}
             }
         }
 

@@ -28,32 +28,34 @@ fun PasswordTextField(input: MutableState<String>, placeholder: String){
         mutableStateOf(false)
     }
 
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(text = "Password")
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = {
+            Text(text = "Password")
                 },
-                visualTransformation = if (isPasswordVisible.value) {
-                    VisualTransformation.None
-                } else {
-                    PasswordVisualTransformation()
-                       },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                value = input.value, onValueChange = {
-                    input.value = it
-                },
-                trailingIcon={
-                    IconButton(onClick = {
-                        isPasswordVisible.value = !isPasswordVisible.value
-                    }){
-                        Icon(
-                            if(isPasswordVisible.value){
-                                Icons.Filled.VisibilityOff
-                            } else{
-                                Icons.Filled.Visibility
-                            },"Password")
-                    }
-                })
-        }
+        //para que se vea la contraseña
+        visualTransformation = if (isPasswordVisible.value) {
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
+               },
+        // para que se vea el teclado de contraseña
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        value = input.value, onValueChange = {
+            input.value = it },
+        // para que se vea el icono de visibilidad
+        trailingIcon={
+            IconButton(onClick = {
+                isPasswordVisible.value = !isPasswordVisible.value
+            }){
+                Icon(
+                    if(isPasswordVisible.value){
+                        Icons.Filled.VisibilityOff
+                    } else{
+                        Icons.Filled.Visibility
+                          },"Password")
+            }
+        })
+}
 
 
