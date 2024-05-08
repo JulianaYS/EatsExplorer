@@ -2,7 +2,7 @@ package pe.edu.upc.eatsexplorer
 
 import android.app.Application
 import android.content.Context
-
+//para obtener el context de la aplicacion
 class MyApplication: Application(){
     override fun onCreate() {
         super.onCreate()

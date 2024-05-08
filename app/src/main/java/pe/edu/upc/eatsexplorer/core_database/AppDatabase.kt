@@ -9,8 +9,8 @@ import pe.edu.upc.eatsexplorer.feature_restaurant.data.local.RestaurantEntity
 
 @Database(entities = [RestaurantEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase(){
-    abstract fun getRestaurantDao(): RestaurantDao
-
+    abstract fun getRestaurantDao(): RestaurantDao  //puede declarar metodos y tener implementaciones
+    //mezcla de interfaz y clase
     companion object{
         private var appDatabase: AppDatabase? = null
 
@@ -20,7 +20,8 @@ abstract class AppDatabase : RoomDatabase(){
                     context,
                     AppDatabase::class.java,
                     "eatxplorer-db"
-                ).allowMainThreadQueries().build()
+                ).allowMainThreadQueries()//permite que se ejecuten procesos en segundo plano
+                    .build()
             }
             return appDatabase as AppDatabase
         }

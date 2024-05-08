@@ -1,6 +1,9 @@
 package pe.edu.upc.eatsexplorer.feature_restaurant.data.repository
 
 import android.util.Log
+import pe.edu.upc.eatsexplorer.feature_restaurant.data.local.RestaurantDao
+import pe.edu.upc.eatsexplorer.feature_restaurant.data.local.RestaurantDaoFactory
+import pe.edu.upc.eatsexplorer.feature_restaurant.data.local.RestaurantEntity
 import pe.edu.upc.eatsexplorer.feature_restaurant.data.remote.RestaurantService
 import pe.edu.upc.eatsexplorer.feature_restaurant.data.remote.RestaurantServiceFactory
 import pe.edu.upc.eatsexplorer.feature_restaurant.data.remote.RestaurantsResponse
@@ -10,7 +13,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RestaurantRepository(private val restaurantService: RestaurantService = RestaurantServiceFactory.getRestaurantService()) {
+class RestaurantRepository(
+    private val restaurantService: RestaurantService = RestaurantServiceFactory.getRestaurantService(),
+    private val restaurantDao: RestaurantDao = RestaurantDaoFactory.getRestaurantDao()
+) {
+
+    fun insert(id: Int){
+        restaurantDao.insert(RestaurantEntity(id))
+    }
+
+    fun delete(id: Int){
+        restaurantDao.delete(RestaurantEntity(id))
+    }
+
+    fun isFavorite(id: Int): Boolean {
+        return (restaurantDao.fetchById(id)!= null)
+    }
 
     fun getAll(callback: (Restaurants) -> Unit) {
         val getAll = restaurantService.getAll()
@@ -25,8 +43,10 @@ class RestaurantRepository(private val restaurantService: RestaurantService = Re
                     var restaurants: Restaurants = arrayListOf()
                     for (restaurantResponse in restaurantsResponse){
                         restaurants = restaurants + Restaurant(
+                            restaurantResponse.id,
                             restaurantResponse.title,
-                            restaurantResponse.poster
+                            restaurantResponse.poster,
+                            isFavorite(restaurantResponse.id)
                         )
                     }
                     callback(restaurants)

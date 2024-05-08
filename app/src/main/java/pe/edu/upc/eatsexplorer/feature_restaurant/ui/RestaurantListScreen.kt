@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +36,9 @@ fun RestaurantListScreen(
     Scaffold {paddingValues ->
         LazyColumn (modifier = Modifier.padding(paddingValues)){
             items(restaurants.value){restaurant ->
-                RestaurantItem(restaurant)
+                RestaurantItem(restaurant,
+                    insert = {restaurantRepository.insert(it)},
+                    delete = {restaurantRepository.delete(it)})
             }
         }
 
@@ -45,10 +46,12 @@ fun RestaurantListScreen(
 }
 
 @Composable
-fun RestaurantItem(restaurant: Restaurant){
+fun RestaurantItem(restaurant: Restaurant, insert: (Int) -> Unit, delete: (Int) -> Unit){
     val isFavorite = remember {
         mutableStateOf(false)
     }
+    isFavorite.value = restaurant.isFavorite
+
     Card(modifier = Modifier.padding(6.dp)){
         Row (modifier = Modifier.fillMaxWidth()){
             RestaurantImage(restaurant.url)
@@ -56,7 +59,15 @@ fun RestaurantItem(restaurant: Restaurant){
                 .padding(6.dp).weight(5f)
                 ,text =restaurant.name)
             IconButton(
-                onClick = { isFavorite.value=!isFavorite.value },
+                onClick = {
+                    isFavorite.value=!isFavorite.value
+                    restaurant.isFavorite = isFavorite.value
+                    if(isFavorite.value){
+                        insert(restaurant.id)
+                    }else{
+                        delete(restaurant.id)
+                    }
+                          },
                 modifier = Modifier.weight(1.5f)) {
                 Icon(Icons.Filled.Favorite, "Favorite",
                     tint = if (isFavorite.value)
